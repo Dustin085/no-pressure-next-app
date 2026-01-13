@@ -50,20 +50,20 @@ export default function LoginPage() {
     };
 
     return (
-        <main className="min-h-screen flex items-center justify-center bg-green-100">
-            <div className="bg-white p-10 rounded-2xl shadow-md w-90 space-y-4">
-                <h1 className="text-2xl font-bold text-center text-green-700">
+        <main className="min-h-screen flex items-center justify-center bg-bg">
+            <div className="bg-card p-10 rounded-2xl shadow-md w-90 space-y-4">
+                <h1 className="text-2xl font-bold text-center text-text">
                     NoPressure Login
                 </h1>
 
                 {error && (
-                    <p className="text-sm text-red-600 text-center">{error}</p>
+                    <p className="text-sm text-error text-center">{error}</p>
                 )}
 
                 <input
                     type="email"
                     placeholder="Email"
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-text"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -71,7 +71,7 @@ export default function LoginPage() {
                 <input
                     type="password"
                     placeholder="Password"
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border rounded-lg text-text"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -79,16 +79,16 @@ export default function LoginPage() {
                 <button
                     onClick={handleEmailLogin}
                     disabled={loading}
-                    className="w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50"
+                    className="w-full py-2 bg-primary text-white rounded-lg hover:bg-primary-hover disabled:opacity-50"
                 >
                     {loading ? 'Logging in...' : 'Login'}
                 </button>
 
-                <div className="text-center text-sm text-gray-400">or</div>
+                <div className="text-center text-sm text-text-muted">or</div>
 
                 <button
                     onClick={handleGoogleLogin}
-                    className="w-full py-2 border rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50"
+                    className="w-full py-2 border border-gray-500 rounded-lg flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300"
                 >
                     <Image src="/google.svg" className="w-5 h-5" width={36} height={36} alt="google icon"/>
                     Login with Google
@@ -96,7 +96,7 @@ export default function LoginPage() {
 
                 <button
                     onClick={() => router.push('/signup')}
-                    className="w-full py-2 text-sm text-green-700 hover:underline"
+                    className="w-full py-2 text-sm text-primary hover:underline"
                 >
                     Create a new account
                 </button>

@@ -2,8 +2,11 @@
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle'; // 你之前做的 dark/light toggle
 import { ROUTES } from '@/lib/constants/routes';
+import { useLogout } from '@/app/hooks/useLogout';
 
 export default function Navbar() {
+    const logout = useLogout()
+
     return (
         <nav className="bg-card dark:bg-card border-b border-border p-4 flex justify-between items-center">
             {/* Logo / Brand */}
@@ -32,9 +35,9 @@ export default function Navbar() {
             {/* Actions */}
             <div className="flex items-center space-x-4">
                 <ThemeToggle />
-                <Link href="/logout" className="text-text-muted hover:text-text">
+                <button onClick={logout} className="px-4 py-2 rounded bg-primary hover:bg-primary-hover text-text">
                     Logout
-                </Link>
+                </button>
             </div>
 
             {/* Mobile Menu Button */}
