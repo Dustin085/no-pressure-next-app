@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Design Tokens */
+
+  /* Primary */
+  --color-primary: #6bcf9b;       /* #6BCF9B */
+  --color-primary-hover: #5ec28f; /* #5EC28F */
+  --color-primary-active: #52b886; /* #52B886 */
+
+  /* Accent */
+  --color-mint: #b7e4c7;          /* #B7E4C7 */
+  --color-sky: #a3d5ff;           /* #A3D5FF */
+  --color-softyellow: #ffe8a3;    /* #FFE8A3 */
+
+  /* Light mode */
+  --color-bg: #f6faf8;            /* #F6FAF8 */
+  --color-card: #ffffff;          /* #FFFFFF */
+  --color-border: #e2ece8;        /* #E2ECE8 */
+
+  --color-text: #1f2d2b;          /* #1F2D2B */
+  --color-text-muted: #5f726e;    /* #5F726E */
+
+  /* Feedback */
+  --color-success: #4caf50;       /* #4CAF50 */
+  --color-warning: #ffb703;       /* #FFB703 */
+  --color-error: #e63946;         /* #E63946 */
+  --color-info: #219ebc;          /* #219EBC */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.dark {
+  /* Dark mode override */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --color-primary: #4fbf8a;       /* 暗色模式主色 */
+  --color-bg: #1f2d2b;            /* 深背景 */
+  --color-card: #162824;          /* 卡片背景 */
+  --color-border: #223a35;        /* 邊框 */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --color-text: #e6f4ef;          /* 主要文字 */
+  --color-text-muted: #a3c5bb;    /* 次要文字 */
 }

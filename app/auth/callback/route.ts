@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 // The client you created from the Server-Side Auth instructions
 import { createClient } from '@/lib/supabase/server'
-import { ROUTES } from '@/lib/routes'
+import { ROUTES } from '@/lib/constants/routes'
 
 
 export async function GET(request: Request) {

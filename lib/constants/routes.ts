@@ -3,6 +3,7 @@ export const ROUTES = {
     REGISTER: '/register',
     DASHBOARD: '/dashboard',
     RECORDS: '/records',
+    PROFILE: '/profile',
     ONBOARDING: '/onboarding',
     AUTH_CALLBACK: '/auth/callback',
     AUTH_ERROR: '/auth/auth-code-error',
