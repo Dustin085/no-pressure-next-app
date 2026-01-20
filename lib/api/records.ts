@@ -1,3 +1,4 @@
+import { QuickRecordFormData } from "@/app/features/record/types";
 import { createClient } from "@/lib/supabase/client";
 
 export async function getRecords() {
@@ -28,14 +29,14 @@ export async function getRecentRecords(limit = 5) {
     return data;
 }
 
-export type CreateRecordInput = {
-    systolic: number;
-    diastolic: number;
-    pulse?: number | null;
-    measured_at: string; // ISO string
-};
+// export type CreateRecordInput = {
+//     systolic: number;
+//     diastolic: number;
+//     pulse?: number | null;
+//     measured_at: string; // ISO string
+// };
 
-export async function createRecord(input: CreateRecordInput) {
+export async function createRecord(input: QuickRecordFormData) {
     const supabase = createClient();
 
     // 1️⃣ 取得目前使用者

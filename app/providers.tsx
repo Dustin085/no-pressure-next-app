@@ -1,5 +1,6 @@
 'use client';
 
+import AuthListener from '@/lib/auth/AuthListener';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode, useState } from 'react';
 
@@ -8,6 +9,7 @@ export default function Providers({ children }: { children: ReactNode }) {
 
     return (
         <QueryClientProvider client={queryClient}>
+            <AuthListener />
             {children}
         </QueryClientProvider>
     );
