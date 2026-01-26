@@ -1,8 +1,7 @@
 import { QuickRecordFormData } from "@/app/features/record/types";
-import { createClient } from "@/lib/supabase/client";
+import { supabase } from "@/lib/supabase/client";
 
 export async function getRecords() {
-    const supabase = createClient();
     const { data, error } = await supabase
         .from('blood_pressure_records')
         .select('*')
@@ -16,7 +15,6 @@ export async function getRecords() {
 }
 
 export async function getRecentRecords(limit = 5) {
-    const supabase = createClient();
 
     const { data, error } = await supabase
         .from('blood_pressure_records')
@@ -37,7 +35,6 @@ export async function getRecentRecords(limit = 5) {
 // };
 
 export async function createRecord(input: QuickRecordFormData) {
-    const supabase = createClient();
 
     // 1️⃣ 取得目前使用者
     const {

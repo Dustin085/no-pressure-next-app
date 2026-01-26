@@ -6,7 +6,8 @@ export const recordSchema = z.object({
     pulse: z.preprocess(
         (v) => {
             if (v === '' || v === null || v === undefined) return undefined;
-            return Number(v);
+            const n = Number(v);
+            return isNaN(n) ? undefined : n; // 非數字也當作沒填
         },
         z.number().optional()
     ),

@@ -10,7 +10,7 @@ export default function Dashboard() {
     const user = useUser()
 
     return (
-        <main className="min-h-screen bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
+        <main className="bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
             <div className="max-w-6xl mx-auto p-4 space-y-6">
                 {/* Greeting */}
                 <section>
