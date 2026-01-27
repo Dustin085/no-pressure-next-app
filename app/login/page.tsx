@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import Image from 'next/image';
 import { ROUTES } from '@/lib/constants/routes';
 
@@ -13,7 +13,6 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const supabase = createClient()
     // 已登入直接導走
     useEffect(() => {
         supabase.auth.getSession().then(({ data }) => {
@@ -21,7 +20,7 @@ export default function LoginPage() {
                 router.replace(ROUTES.DASHBOARD);
             }
         });
-    }, [router, supabase.auth]);
+    }, [router]);
 
     const handleEmailLogin = async () => {
         setLoading(true);
@@ -50,7 +49,7 @@ export default function LoginPage() {
     };
 
     return (
-        <main className="min-h-screen flex items-center justify-center bg-bg">
+        <main className="h-full flex items-center justify-center bg-bg">
             <div className="bg-card p-10 rounded-2xl shadow-md w-90 space-y-4">
                 <h1 className="text-2xl font-bold text-center text-text">
                     NoPressure Login
@@ -88,7 +87,7 @@ export default function LoginPage() {
 
                 <button
                     onClick={handleGoogleLogin}
-                    className="w-full py-2 border border-gray-500 rounded-lg flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300"
+                    className="w-full py-2 border text-gray-600 border-gray-500 rounded-lg flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300"
                 >
                     <Image src="/google.svg" className="w-5 h-5" width={36} height={36} alt="google icon"/>
                     Login with Google

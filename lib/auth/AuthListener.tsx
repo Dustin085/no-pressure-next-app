@@ -1,23 +1,35 @@
 'use client';
 
 import { useEffect } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import { useQueryClient } from '@tanstack/react-query';
 
 export default function AuthListener() {
-    const supabase = createClient();
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-            // 使用者登出時，清空資料庫
-            if (event === "SIGNED_OUT") {
-                queryClient.clear();
+        const { data: sub } = supabase.auth.onAuthStateChange(
+            (event, session) => {
+                // 🟢 初始 session（重新整理 / redirect 回來）
+                if (event === 'INITIAL_SESSION') {
+                    queryClient.setQueryData(['user'], session?.user ?? null);
+                }
+
+                // 🟢 登入成功
+                if (event === 'SIGNED_IN') {
+                    queryClient.setQueryData(['user'], session?.user ?? null);
+                }
+
+                // 🔴 登出
+                if (event === 'SIGNED_OUT') {
+                    // queryClient.setQueryData(['user'], null);
+                    queryClient.clear();
+                }
             }
-        });
+        );
 
         return () => sub.subscription.unsubscribe();
-    }, [queryClient, supabase.auth]);
+    }, [queryClient]);
 
     return null;
 }

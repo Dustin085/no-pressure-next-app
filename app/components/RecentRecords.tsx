@@ -5,10 +5,10 @@ import { useRecentRecords } from '@/lib/queries/useRecentRecords';
 export default function RecentRecords() {
     const { data, isLoading, error } = useRecentRecords(5);
 
-    if (isLoading) return <div className="text-muted">載入中...</div>;
+    if (isLoading) return <div className="">載入中...</div>;
     if (error) return <div className="text-error">載入失敗</div>;
     if (!data || data.length === 0)
-        return <div className="text-muted">尚無紀錄</div>;
+        return <div className="">尚無紀錄</div>;
 
     return (
         <div className="rounded-2xl bg-card p-4 shadow-sm">
@@ -22,14 +22,14 @@ export default function RecentRecords() {
                         <div>
                             <div className="font-medium">
                                 {r.systolic} / {r.diastolic}
-                                <span className="text-sm text-muted ml-1">mmHg</span>
+                                <span className="text-sm ml-1">mmHg</span>
                             </div>
-                            <div className="text-xs text-muted">
+                            <div className="text-xs">
                                 {new Date(r.measured_at).toLocaleString()}
                             </div>
                         </div>
                         {r.pulse && (
-                            <div className="text-sm text-muted">❤️ {r.pulse}</div>
+                            <div className="text-sm">❤️ {r.pulse}</div>
                         )}
                     </li>
                 ))}

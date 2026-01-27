@@ -6,7 +6,8 @@ export const recordSchema = z.object({
     pulse: z.preprocess(
         (v) => {
             if (v === '' || v === null || v === undefined) return undefined;
-            return Number(v);
+            const n = Number(v);
+            return isNaN(n) ? undefined : n; // 非數字也當作沒填
         },
         z.number().optional()
     ),
@@ -19,4 +20,10 @@ export const recordSchema = z.object({
             return new Date(v);
         })
         .refine((d) => d <= new Date(), "不能是未來時間"),
+});
+
+export const averageBloodPressureSchema = z.object({
+    avg_systolic: z.number().nullable(),
+    avg_diastolic: z.number().nullable(),
+    avg_pulse: z.number().nullable(),
 });

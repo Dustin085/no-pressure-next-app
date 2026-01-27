@@ -5,12 +5,14 @@ export default function ThemeToggle() {
     // 先預設為 undefined，避免 server render 與 client mismatch
     const [dark, setDark] = useState<boolean | undefined>(undefined);
 
+    // useEffectEvent 會確保使用的 state(和 setter) 和 props 是最新的
     const updateDark = useEffectEvent(() => {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         setDark(prefersDark);
         document.documentElement.classList.toggle('dark', prefersDark);
     })
 
+    // 利用 useEffect 在 client mount 後跑一次
     useEffect(() => {
         updateDark()
     }, []);

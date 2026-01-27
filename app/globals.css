@@ -1,43 +1,115 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Design Tokens */
+  /* Radius */
+  --radius: 0.625rem;
 
-  /* Primary */
-  --color-primary: #6bcf9b;       /* #6BCF9B */
-  --color-primary-hover: #5ec28f; /* #5EC28F */
-  --color-primary-active: #52b886; /* #52B886 */
+  /* Brand / Primary */
+  --primary: #6bcf9b;
+  --primary-hover: #5ec28f;
+  --primary-active: #52b886;
+  --primary-foreground: oklch(0.985 0 0); /* 白色文字或淺色文字 */
 
-  /* Accent */
-  --color-mint: #b7e4c7;          /* #B7E4C7 */
-  --color-sky: #a3d5ff;           /* #A3D5FF */
-  --color-softyellow: #ffe8a3;    /* #FFE8A3 */
-
-  /* Light mode */
-  --color-bg: #f6faf8;            /* #F6FAF8 */
-  --color-card: #ffffff;          /* #FFFFFF */
-  --color-border: #e2ece8;        /* #E2ECE8 */
-
-  --color-text: #1f2d2b;          /* #1F2D2B */
-  --color-text-muted: #5f726e;    /* #5F726E */
+  /* Accent colors */
+  --accent-mint: #b7e4c7;
+  --accent-sky: #a3d5ff;
+  --accent-softyellow: #ffe8a3;
 
   /* Feedback */
-  --color-success: #4caf50;       /* #4CAF50 */
-  --color-warning: #ffb703;       /* #FFB703 */
-  --color-error: #e63946;         /* #E63946 */
-  --color-info: #219ebc;          /* #219EBC */
+  --success: #4caf50;
+  --warning: #ffb703;
+  --error: #e63946;
+  --info: #219ebc;
+
+  /* Core UI tokens (shadcn / oklch) */
+  --background: #f6faf8;
+  --foreground: #1f2d2b;
+  --card: #ffffff;
+  --card-foreground: #1f2d2b;
+  --border: #e2ece8;
+  --input: #ffffff;
+  --ring: #6bcf9b;
+
+  --popover: #ffffff;
+  --popover-foreground: #1f2d2b;
 }
 
 .dark {
-  /* Dark mode override */
+  --background: #1f2d2b;
+  --foreground: #e6f4ef;
 
-  --color-primary: #4fbf8a;       /* 暗色模式主色 */
-  --color-bg: #1f2d2b;            /* 深背景 */
-  --color-card: #162824;          /* 卡片背景 */
-  --color-border: #223a35;        /* 邊框 */
+  --card: #162824;
+  --card-foreground: #e6f4ef;
 
-  --color-text: #e6f4ef;          /* 主要文字 */
-  --color-text-muted: #a3c5bb;    /* 次要文字 */
+  --border: #223a35;
+  --input: #223a35;
+  --ring: #4fbf8a;
+
+  --primary: #4fbf8a;
+  --primary-hover: #3fae7b;
+  --primary-active: #32976b;
+  --primary-foreground: #e6f4ef;
+
+  --color-success: #3d8a3d;
+  --color-warning: #e6a400;
+  --color-error: #d63a42;
+  --color-info: #1f7aa5;
+
+  --popover: #162824;
+  --popover-foreground: #e6f4ef;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--accent-softyellow);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--border);
+  --color-muted-foreground: var(--foreground);
+  --color-accent: var(--accent-mint);
+  --color-accent-foreground: var(--foreground);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+
+  --color-destructive: var(--error);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }

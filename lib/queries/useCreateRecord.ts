@@ -7,7 +7,10 @@ export function useCreateRecord() {
         mutationKey: ['createRecord'],
         mutationFn: createRecord,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['records'] });
+            queryClient.invalidateQueries({
+                predicate: (query) =>
+                    query.queryKey[0] === 'blood-pressure-records'
+            });
         }
     })
 }

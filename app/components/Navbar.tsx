@@ -3,14 +3,19 @@ import Link from 'next/link';
 import ThemeToggle from './ThemeToggle'; // 你之前做的 dark/light toggle
 import { ROUTES } from '@/lib/constants/routes';
 import { useLogout } from '@/app/hooks/useLogout';
+import { QuickRecordDialog } from '@/app/features/record/components/QuickRecordDialog';
+import { useUser } from '@/lib/queries/useUser';
 
 export default function Navbar() {
     const logout = useLogout()
+
+    const { data: user, isLoading } = useUser()
 
     return (
         <nav className="bg-card dark:bg-card border-b border-border p-4 flex justify-between items-center">
             {/* Logo / Brand */}
             <div className="flex items-center space-x-2">
+                {/* Logo */}
                 <div className="w-8 h-8 bg-primary rounded-full"></div>
                 <Link href="/">
                     <span className="text-text dark:text-text font-semibold text-lg">
@@ -49,6 +54,9 @@ export default function Navbar() {
                     </svg>
                 </button>
             </div>
+
+            {/* Quick Record Dialog */}
+            {!isLoading && user && <QuickRecordDialog />}
         </nav>
     );
 }
