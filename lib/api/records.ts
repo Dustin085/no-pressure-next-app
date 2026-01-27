@@ -1,3 +1,4 @@
+import { averageBloodPressureSchema } from "@/app/features/record/schema";
 import { QuickRecordFormData } from "@/app/features/record/types";
 import { supabase } from "@/lib/supabase/client";
 
@@ -15,7 +16,6 @@ export async function getRecords() {
 }
 
 export async function getRecentRecords(limit = 5) {
-
     const { data, error } = await supabase
         .from('blood_pressure_records')
         .select('id, systolic, diastolic, pulse, measured_at')
@@ -26,6 +26,43 @@ export async function getRecentRecords(limit = 5) {
     if (error) throw error;
     return data;
 }
+
+type UTCISOString = string;
+
+/**
+ * 取得某時間區間的血壓紀錄
+ * @param startISO 當日 00:00:00
+ * @param endISO 次日 00:00:00
+ * @returns 時間區間內的血壓紀錄陣列
+ */
+export async function getRecordsWithinISORange(
+    startISO: UTCISOString,
+    endISO: UTCISOString // next day start
+) {
+    const { data, error } = await supabase
+        .from('blood_pressure_records')
+        .select('id, systolic, diastolic, pulse, measured_at')
+        .gte('measured_at', startISO)
+        .lt('measured_at', endISO)
+        .order('measured_at', { ascending: false });
+
+    if (error) throw error;
+    return data;
+}
+
+export async function getAverageBloodPressureWithinTimeRange(
+    startISO: UTCISOString,
+    endISO: UTCISOString // next day start
+) {
+    const { data, error } = await supabase
+        .rpc('get_average_blood_pressure', { start: startISO, end: endISO })
+        .single();
+
+    if (error) throw error;
+    return averageBloodPressureSchema.parse(data);
+}
+
+
 
 // export type CreateRecordInput = {
 //     systolic: number;

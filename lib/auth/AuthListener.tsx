@@ -22,7 +22,8 @@ export default function AuthListener() {
 
                 // 🔴 登出
                 if (event === 'SIGNED_OUT') {
-                    queryClient.setQueryData(['user'], null);
+                    // queryClient.setQueryData(['user'], null);
+                    queryClient.clear();
                 }
             }
         );

@@ -21,3 +21,9 @@ export const recordSchema = z.object({
         })
         .refine((d) => d <= new Date(), "不能是未來時間"),
 });
+
+export const averageBloodPressureSchema = z.object({
+    avg_systolic: z.number().nullable(),
+    avg_diastolic: z.number().nullable(),
+    avg_pulse: z.number().nullable(),
+});
