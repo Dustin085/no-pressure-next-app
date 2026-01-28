@@ -9,9 +9,10 @@ export function RecentAverageBloodPressure() {
 
     return (
         <p>
-            最近七日平均血壓{" "}
+            最近 7 天平均
+            <br />
             <span className="font-medium">
-                {result.payload.systolic}/{result.payload.diastolic}
+                {result.payload.systolic} / {result.payload.diastolic}
             </span>
             <span className="text-sm ml-1">
                 {result.payload.unit}
