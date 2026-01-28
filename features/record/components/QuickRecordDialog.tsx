@@ -1,6 +1,6 @@
 'use client'
 
-import { recordSchema } from "@/app/features/record/schema";
+import { recordSchema } from "@/features/record/schema";
 import { useCreateRecord } from "@/lib/queries/useCreateRecord";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { QuickRecordFormData } from "@/app/features/record/types";
+import { QuickRecordFormData } from "@/features/record/types";
 
 export function QuickRecordDialog() {
     const [open, setOpen] = useState(false);
