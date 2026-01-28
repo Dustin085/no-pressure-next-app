@@ -1,7 +1,7 @@
 'use client';
 
 import RecentRecords from "@/components/RecentRecords";
-import { useRecentAverageBloodPressure } from "@/lib/queries/useRecentAverageBloodPressure";
+import { RecentAverageBloodPressure } from "@/features/insights/components/RecentAverageBloodPressure";
 import { useUser } from "@/lib/queries/useUser";
 
 // import TrendChart from '@/components/TrendChart';
@@ -10,23 +10,13 @@ import { useUser } from "@/lib/queries/useUser";
 export default function Dashboard() {
     const user = useUser()
 
-    const { data: averageBP, isLoading: isLoadingABP } = useRecentAverageBloodPressure()
-    console.log(averageBP)
-
     return (
         <main className="bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
             <div className="max-w-6xl mx-auto p-4 space-y-6">
                 {/* Greeting */}
                 <section>
                     <h1 className="text-2xl font-semibold">早安, {user.data?.user_metadata.name}!</h1>
-                    <p className="text-text-muted dark:text-text-muted-dark mt-1">
-                        {isLoadingABP ? "正在獲取最近七日血壓..." :
-                            !averageBP ? "最近血壓讀取失敗" :
-                                averageBP.avg_systolic !== null ?
-                                    `最近七日平均血壓${averageBP.avg_systolic.toFixed(0)}/${averageBP.avg_diastolic?.toFixed(0)} mmHg` :
-                                    "最近七日無血壓紀錄"
-                        }
-                    </p>
+                    <RecentAverageBloodPressure />
                 </section>
 
                 {/* Quick Stats */}
