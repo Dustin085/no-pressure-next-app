@@ -1,6 +1,6 @@
 'use client';
 
-import RecentRecords from "@/app/components/RecentRecords";
+import RecentRecords from "@/components/RecentRecords";
 import { useRecentAverageBloodPressure } from "@/lib/queries/useRecentAverageBloodPressure";
 import { useUser } from "@/lib/queries/useUser";
 

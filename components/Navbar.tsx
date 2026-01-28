@@ -1,9 +1,9 @@
 'use client';
 import Link from 'next/link';
-import ThemeToggle from './ThemeToggle'; // 你之前做的 dark/light toggle
+import ThemeToggle from '@/components/ThemeToggle';
 import { ROUTES } from '@/lib/constants/routes';
-import { useLogout } from '@/app/hooks/useLogout';
-import { QuickRecordDialog } from '@/app/features/record/components/QuickRecordDialog';
+import { useLogout } from '@/hooks/useLogout';
+import { QuickRecordDialog } from '@/features/record/components/QuickRecordDialog';
 import { useUser } from '@/lib/queries/useUser';
 
 export default function Navbar() {
