@@ -1,4 +1,4 @@
-import { useRecentAverageBloodPressure } from "@/features/insights/queries/useRecentAverageBloodPressure";
+import { useRecentAverageBloodPressure } from "@/features/insights/hooks/useRecentAverageBloodPressure";
 
 type ABPSuccessPayload = {
     systolic: number;

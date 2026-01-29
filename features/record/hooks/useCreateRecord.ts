@@ -1,4 +1,4 @@
-import { createRecord } from "@/lib/api/records";
+import { createRecord } from "@/features/record/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useCreateRecord() {

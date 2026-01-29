@@ -1,4 +1,4 @@
-import { useRecentRecords } from "@/lib/queries/useRecentRecords";
+import { useRecentRecords } from "@/features/record/hooks/useRecentRecords";
 
 export function LatestRecordTime() {
     const { data, isLoading, error } = useRecentRecords(1)

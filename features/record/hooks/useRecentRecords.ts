@@ -1,13 +1,6 @@
-import { getRecentRecords } from "@/lib/api/records";
+import { getRecentRecords } from "@/features/record/api";
+import { BloodPressureRecord } from "@/features/record/types";
 import { QueryFunctionContext, useQuery, useQueryClient } from "@tanstack/react-query";
-
-type RecordType = {
-    id: string;
-    systolic: number;
-    diastolic: number;
-    pulse: number;
-    measured_at: string;
-};
 
 export function useRecentRecords(limit = 5) {
     const queryClient = useQueryClient();
@@ -34,7 +27,7 @@ export function useRecentRecords(limit = 5) {
                     (a, b) => (b.queryKey[2] as number) - (a.queryKey[2] as number)
                 )[0];
 
-                const data = largestCache.state.data as RecordType[] | undefined;
+                const data = largestCache.state.data as BloodPressureRecord[] | undefined;
                 if (data?.length) return data.slice(0, requestedLimit); // 派生前 limit 筆
             }
 

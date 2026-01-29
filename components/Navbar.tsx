@@ -4,7 +4,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import { ROUTES } from '@/lib/constants/routes';
 import { useLogout } from '@/hooks/useLogout';
 import { QuickRecordDialog } from '@/features/record/components/QuickRecordDialog';
-import { useUser } from '@/lib/queries/useUser';
+import { useUser } from '@/features/auth/hooks/useUser';
 
 export default function Navbar() {
     const logout = useLogout()

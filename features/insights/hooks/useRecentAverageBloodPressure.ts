@@ -1,4 +1,4 @@
-import { getAverageBloodPressureWithinTimeRange } from "@/lib/api/records";
+import { getAverageBloodPressureWithinTimeRange } from "@/features/insights/api";
 import { useQuery } from "@tanstack/react-query";
 
 export function useRecentAverageBloodPressure(days: number = 7) {

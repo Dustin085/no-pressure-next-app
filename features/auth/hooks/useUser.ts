@@ -1,10 +1,10 @@
-import { fetchUser } from "@/lib/api/user";
+import { getUser } from "@/features/auth/api";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUser() {
     return useQuery({
         queryKey: ["auth", "user"],
-        queryFn: fetchUser,
+        queryFn: getUser,
         staleTime: Infinity,
     })
 }

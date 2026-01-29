@@ -1,6 +1,6 @@
 'use client';
 
-import AuthListener from '@/lib/auth/AuthListener';
+import AuthListener from '@/features/auth/components/AuthListener';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode, useState } from 'react';
 

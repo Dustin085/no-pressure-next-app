@@ -3,7 +3,7 @@
 import RecentRecords from "@/components/RecentRecords";
 import { LatestRecordTime } from "@/features/insights/components/LatestRecordTime";
 import { RecentAverageBloodPressure } from "@/features/insights/components/RecentAverageBloodPressure";
-import { useUser } from "@/lib/queries/useUser";
+import { useUser } from "@/features/auth/hooks/useUser";
 
 // import TrendChart from '@/components/TrendChart';
 // import QuickStats from '@/components/QuickStats';

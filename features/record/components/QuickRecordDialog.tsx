@@ -1,7 +1,7 @@
 'use client'
 
-import { recordSchema } from "@/features/record/schema";
-import { useCreateRecord } from "@/lib/queries/useCreateRecord";
+import { bloodPressureRecordInputSchema } from "@/features/record/schema";
+import { useCreateRecord } from "@/features/record/hooks/useCreateRecord";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -26,13 +26,13 @@ export function QuickRecordDialog() {
         reset,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(recordSchema),
+        resolver: zodResolver(bloodPressureRecordInputSchema),
     });
 
     const mutation = useCreateRecord();
 
     const onSubmit = (data: QuickRecordFormData) => {
-        const parsed = recordSchema.parse(data);
+        const parsed = bloodPressureRecordInputSchema.parse(data);
         mutation.mutate(parsed, {
             onSuccess: () => {
                 reset();
