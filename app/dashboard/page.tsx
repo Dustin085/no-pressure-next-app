@@ -4,6 +4,7 @@ import RecentRecords from "@/components/RecentRecords";
 import { LatestRecordTime } from "@/features/insights/components/LatestRecordTime";
 import { RecentAverageBloodPressure } from "@/features/insights/components/RecentAverageBloodPressure";
 import { useUser } from "@/features/auth/hooks/useUser";
+import { TrendChart } from "@/features/insights/components/TrendChart";
 
 // import TrendChart from '@/components/TrendChart';
 // import QuickStats from '@/components/QuickStats';
@@ -34,7 +35,7 @@ export default function Dashboard() {
                 {/* Trend Chart */}
                 <section className="bg-card dark:bg-card-dark rounded-lg p-4 shadow">
                     <h2 className="text-lg font-medium mb-2">血壓趨勢</h2>
-                    {/* <TrendChart /> */}
+                    <TrendChart />
                 </section>
 
                 {/* Recent Records */}
