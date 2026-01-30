@@ -10,20 +10,15 @@ export default function AuthListener() {
     useEffect(() => {
         const { data: sub } = supabase.auth.onAuthStateChange(
             (event, session) => {
-                // 🟢 初始 session（重新整理 / redirect 回來）
-                if (event === 'INITIAL_SESSION') {
-                    queryClient.setQueryData(['user'], session?.user ?? null);
-                }
-
-                // 🟢 登入成功
-                if (event === 'SIGNED_IN') {
+                // 初始 session 或 登入
+                if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
                     queryClient.setQueryData(['user'], session?.user ?? null);
                 }
 
                 // 🔴 登出
                 if (event === 'SIGNED_OUT') {
-                    // queryClient.setQueryData(['user'], null);
-                    queryClient.clear();
+                    queryClient.setQueryData(['user'], null)
+                    queryClient.setQueryData(['blood-pressure-records'], null)
                 }
             }
         );

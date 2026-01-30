@@ -54,5 +54,5 @@ export async function getRecordsWithinISORange(
         .order('measured_at', { ascending: false });
 
     if (error) throw error;
-    return data;
+    return bloodPressureRecordListSchema.parse(data);
 }

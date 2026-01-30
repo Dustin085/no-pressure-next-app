@@ -23,6 +23,8 @@ export default function LoginPage() {
     }, [router]);
 
     const handleEmailLogin = async () => {
+        // console.log('login client === listener client', supabase);
+
         setLoading(true);
         setError(null);
 
@@ -32,7 +34,12 @@ export default function LoginPage() {
         });
 
         if (error) setError(error.message);
-        else router.push('/dashboard');
+        else {
+            setTimeout(() => {
+                router.push('/dashboard');
+            }, 0);
+        }
+        // else router.push('/dashboard');
 
         setLoading(false);
     };
@@ -89,7 +96,7 @@ export default function LoginPage() {
                     onClick={handleGoogleLogin}
                     className="w-full py-2 border text-gray-600 border-gray-500 rounded-lg flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300"
                 >
-                    <Image src="/google.svg" className="w-5 h-5" width={36} height={36} alt="google icon"/>
+                    <Image src="/google.svg" className="w-5 h-5" width={36} height={36} alt="google icon" />
                     Login with Google
                 </button>
 

@@ -56,7 +56,11 @@ export default function Navbar() {
             </div>
 
             {/* Quick Record Dialog */}
-            {!isLoading && user && <QuickRecordDialog />}
+            {!isLoading && user &&
+                <div className='fixed bottom-4 right-4'>
+                    <QuickRecordDialog />
+                </div>
+            }
         </nav>
     );
 }

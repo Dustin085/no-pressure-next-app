@@ -44,7 +44,7 @@ export function QuickRecordDialog() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="default" size={"lg"} className="absolute bottom-4 right-4">快速紀錄</Button>
+                <Button variant="default" size={"lg"}>快速紀錄</Button>
             </DialogTrigger>
 
             <DialogContent className="sm:max-w-lg">

@@ -35,6 +35,10 @@
 
   --popover: #ffffff;
   --popover-foreground: #1f2d2b;
+
+  /* Blood pressure chart line colors */
+  --bp-systolic-color: #ff4d4f;
+  --bp-diastolic-color: #1890ff;
 }
 
 .dark {
@@ -60,6 +64,10 @@
 
   --popover: #162824;
   --popover-foreground: #e6f4ef;
+
+  /* Blood pressure chart line colors */
+  --bp-systolic-color: #ff7875;
+  --bp-diastolic-color: #40a9ff;
 }
 
 @theme inline {
