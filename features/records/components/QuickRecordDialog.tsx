@@ -1,7 +1,7 @@
 'use client'
 
-import { bloodPressureRecordInputSchema } from "@/features/record/schema";
-import { useCreateRecord } from "@/features/record/hooks/useCreateRecord";
+import { bloodPressureRecordInputSchema } from "@/features/records/schema";
+import { useCreateRecord } from "@/features/records/hooks/useCreateRecord";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -15,7 +15,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { QuickRecordFormData } from "@/features/record/types";
+import { QuickRecordFormData } from "@/features/records/types";
 
 export function QuickRecordDialog() {
     const [open, setOpen] = useState(false);

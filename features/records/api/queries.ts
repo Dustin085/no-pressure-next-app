@@ -1,4 +1,4 @@
-import { bloodPressureRecordListSchema } from "@/features/record/schema";
+import { bloodPressureRecordListSchema } from "@/features/records/schema";
 import { supabase } from "@/lib/supabase/client";
 
 /**

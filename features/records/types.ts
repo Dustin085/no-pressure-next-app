@@ -1,4 +1,4 @@
-import { bloodPressureRecordInputSchema, bloodPressureRecordSchema } from "@/features/record/schema";
+import { bloodPressureRecordInputSchema, bloodPressureRecordSchema } from "@/features/records/schema";
 import z from "zod";
 
 export type QuickRecordFormInput = z.input<typeof bloodPressureRecordInputSchema>;

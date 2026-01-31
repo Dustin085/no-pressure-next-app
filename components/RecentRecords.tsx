@@ -1,6 +1,6 @@
 'use client';
 
-import { useRecentRecords } from '@/features/record/hooks/useRecentRecords';
+import { useRecentRecords } from '@/features/records/hooks/useRecentRecords';
 
 export default function RecentRecords() {
     const { data, isLoading, error } = useRecentRecords(5);

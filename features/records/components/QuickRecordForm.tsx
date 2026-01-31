@@ -1,6 +1,6 @@
 'use client'
-import { bloodPressureRecordInputSchema } from "@/features/record/schema";
-import { useCreateRecord } from "@/features/record/hooks/useCreateRecord";
+import { bloodPressureRecordInputSchema } from "@/features/records/schema";
+import { useCreateRecord } from "@/features/records/hooks/useCreateRecord";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 

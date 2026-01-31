@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { QuickRecordFormData } from "@/features/record/types";
+import { QuickRecordFormData } from "@/features/records/types";
 
 export async function createRecord(input: QuickRecordFormData) {
 

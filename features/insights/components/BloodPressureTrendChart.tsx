@@ -1,4 +1,4 @@
-import { useRecordsWithinISORange } from "@/features/record/hooks/useRecordsWithinISORange"
+import { useRecordsWithinISORange } from "@/features/records/hooks/useRecordsWithinISORange"
 import { getRecentNDaysISO } from "@/lib/utils"
 import {
     ResponsiveContainer,

@@ -1,5 +1,5 @@
 'use client'
-import { QuickRecordForm } from "@/features/record/components/QuickRecordForm";
+import { QuickRecordForm } from "@/features/records/components/QuickRecordForm";
 
 export default function QuickRecord() {
 

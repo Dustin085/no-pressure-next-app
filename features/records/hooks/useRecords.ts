@@ -1,4 +1,4 @@
-import { getRecords } from "@/features/record/api";
+import { getRecords } from "@/features/records/api";
 import { useQuery } from "@tanstack/react-query";
 
 export function useRecords() {

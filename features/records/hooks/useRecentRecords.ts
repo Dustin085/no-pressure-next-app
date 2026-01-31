@@ -1,5 +1,5 @@
-import { getRecentRecords } from "@/features/record/api";
-import { BloodPressureRecord } from "@/features/record/types";
+import { getRecentRecords } from "@/features/records/api";
+import { BloodPressureRecord } from "@/features/records/types";
 import { QueryFunctionContext, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useRecentRecords(limit = 5) {

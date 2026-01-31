@@ -1,5 +1,5 @@
-import { averageBloodPressureSchema } from "@/features/record/schema";
-import { QuickRecordFormData } from "@/features/record/types";
+import { averageBloodPressureSchema } from "@/features/records/schema";
+import { QuickRecordFormData } from "@/features/records/types";
 import { supabase } from "@/lib/supabase/client";
 
 export async function getRecords() {

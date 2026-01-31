@@ -1,4 +1,4 @@
-import { getRecordsWithinISORange } from "@/features/record/api";
+import { getRecordsWithinISORange } from "@/features/records/api";
 import { useQuery } from "@tanstack/react-query";
 
 export function useRecordsWithinISORange(startISO: string, endISO: string) {
