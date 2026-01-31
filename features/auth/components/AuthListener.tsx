@@ -18,7 +18,14 @@ export default function AuthListener() {
                 // 🔴 登出
                 if (event === 'SIGNED_OUT') {
                     queryClient.setQueryData(['user'], null)
-                    queryClient.setQueryData(['blood-pressure-records'], null)
+                    queryClient.setQueriesData(
+                        { predicate: (query) => query.queryKey[0] === 'blood-pressure-records' },
+                        null
+                    );
+                    // queryClient.setQueriesData(
+                    //     { predicate: (query) => query.queryKey[0] !== 'public' },
+                    //     null
+                    // );
                 }
             }
         );

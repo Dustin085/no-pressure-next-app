@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import { METADATA } from "@/lib/constants/metadata";
 import Navbar from "../components/Navbar";
 import Providers from "@/app/providers";
+import { Devtools } from "@/devtools/devtools";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,10 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
+
+          {/* DevTools - Won't render on production */}
+          <Devtools />
+
         </Providers>
       </body>
     </html>
