@@ -23,8 +23,6 @@ export default function LoginPage() {
     }, [router]);
 
     const handleEmailLogin = async () => {
-        // console.log('login client === listener client', supabase);
-
         setLoading(true);
         setError(null);
 
@@ -39,7 +37,6 @@ export default function LoginPage() {
                 router.push('/dashboard');
             }, 0);
         }
-        // else router.push('/dashboard');
 
         setLoading(false);
     };

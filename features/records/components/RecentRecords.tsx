@@ -2,7 +2,7 @@
 
 import { useRecentRecords } from '@/features/records/hooks/useRecentRecords';
 
-export default function RecentRecords() {
+export function RecentRecords() {
     const { data, isLoading, error } = useRecentRecords(5);
 
     if (isLoading) return <div className="">載入中...</div>;

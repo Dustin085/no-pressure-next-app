@@ -1,4 +1,4 @@
-import { averageBloodPressureSchema } from "@/features/records/schema";
+import { averageBloodPressureSchema } from "@/features/insights/schema";
 import { supabase } from "@/lib/supabase/client";
 
 type UTCISOString = string;

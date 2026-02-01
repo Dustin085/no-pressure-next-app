@@ -12,12 +12,6 @@ export const bloodPressureRecordSchema = z.object({
 export const bloodPressureRecordListSchema =
     z.array(bloodPressureRecordSchema);
 
-export const averageBloodPressureSchema = z.object({
-    avg_systolic: z.number().nullable(),
-    avg_diastolic: z.number().nullable(),
-    avg_pulse: z.number().nullable(),
-});
-
 // 血壓紀錄輸入的 schema
 export const bloodPressureRecordInputSchema = z.object({
     systolic: z.number().min(50).max(300),

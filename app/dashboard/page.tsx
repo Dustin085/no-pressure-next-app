@@ -1,13 +1,10 @@
 'use client';
 
-import RecentRecords from "@/components/RecentRecords";
+import { RecentRecords } from "@/features/records/components/RecentRecords";
 import { LatestRecordTime } from "@/features/insights/components/LatestRecordTime";
 import { RecentAverageBloodPressure } from "@/features/insights/components/RecentAverageBloodPressure";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { BloodPressureTrendChart } from "@/features/insights/components/BloodPressureTrendChart";
-
-// import TrendChart from '@/components/TrendChart';
-// import QuickStats from '@/components/QuickStats';
 
 export default function Dashboard() {
     const user = useUser()
@@ -48,17 +45,6 @@ export default function Dashboard() {
                         </button>
                     </div>
                 </section>
-
-                {/* <button onClick={() => {
-                    mutation.mutate({
-                        systolic: 123,
-                        diastolic: 84,
-                        pulse: 80,
-                        measured_at: new Date().toISOString(),
-                    });
-                }}>
-                    New Record
-                </button> */}
             </div>
         </main>
     );

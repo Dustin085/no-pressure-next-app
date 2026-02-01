@@ -1,12 +1,16 @@
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getRecentRecords } from "@/features/records/api";
 import { BloodPressureRecord } from "@/features/records/types";
 import { QueryFunctionContext, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useRecentRecords(limit = 5) {
     const queryClient = useQueryClient();
+    const { isAuthenticated, accessToken } = useAuth();
 
     return useQuery({
         queryKey: ['blood-pressure-records', 'recent', limit],
+        enabled: isAuthenticated && !!accessToken, // 等待 token 準備好
+        staleTime: 1000 * 60 * 5, // 5 分鐘
         queryFn: async ({ queryKey }: QueryFunctionContext) => {
             const requestedLimit = queryKey[2] as number;
 
@@ -34,6 +38,5 @@ export function useRecentRecords(limit = 5) {
             // 沒有可用 cache 或 cache 太小 → 正常發 request
             return getRecentRecords(requestedLimit);
         },
-        staleTime: 1000 * 60 * 5, // 5 分鐘
     });
 }

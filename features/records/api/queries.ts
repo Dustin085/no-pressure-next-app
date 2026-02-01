@@ -22,6 +22,12 @@ export async function getRecords() {
  * @returns 最近的血壓紀錄陣列，日期由近到遠排序
  */
 export async function getRecentRecords(limit = 5) {
+    // const { data: { user } } = await supabase.auth.getUser();
+
+    // if (!user) {
+    //     throw new Error('Auth not ready yet');
+    // }
+
     const { data, error } = await supabase
         .from('blood_pressure_records')
         .select('id, systolic, diastolic, pulse, measured_at')
