@@ -2,11 +2,11 @@ import z from "zod";
 
 // 血壓紀錄取結果的 schema
 export const bloodPressureRecordSchema = z.object({
-    id: z.string(),
-    systolic: z.number(),
-    diastolic: z.number(),
-    pulse: z.number().nullable(),
-    measured_at: z.string(),
+    id: z.string().min(1), // 確保不是空字串
+    systolic: z.number().positive(), // 確保是正數
+    diastolic: z.number().positive(),
+    pulse: z.number().positive().nullable(),
+    measured_at: z.string().min(1), // 確保不是空字串
 });
 
 export const bloodPressureRecordListSchema =

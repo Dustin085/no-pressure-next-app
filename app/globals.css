@@ -89,6 +89,7 @@
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
   --color-secondary: var(--accent-softyellow);
   --color-secondary-foreground: var(--foreground);
   --color-muted: var(--border);

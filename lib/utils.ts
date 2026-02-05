@@ -6,8 +6,28 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getRecentNDaysISO(n: number) {
-  const today = new Date();
-  const endISO = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).toISOString();
-  const startISO = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (n - 1)).toISOString();
-  return { startISO, endISO };
+  const end = new Date();
+  end.setHours(0, 0, 0, 0);           // 今天 00:00:00
+  end.setDate(end.getDate() + 1);     // 明天 00:00:00
+
+  const start = new Date(end);
+  start.setDate(start.getDate() - n); // 往前 n 天
+
+  return {
+    startISO: start.toISOString(),
+    endISO: end.toISOString(),
+  };
+}
+
+export function getRecentNDaysISOSteps(n: number) {
+  const steps = [];
+  const end = new Date();
+  end.setHours(0, 0, 0, 0);           // 今天 00:00:00
+  end.setDate(end.getDate() + 1);     // 明天 00:00:00
+  for (let i = n; i >= 0; i--) {
+    const date = new Date(end);
+    date.setDate(date.getDate() - i);
+    steps.push(date.toISOString());
+  }
+  return steps;
 }
