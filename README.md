@@ -12,7 +12,7 @@
 
 ## Live Demo
 
-https://no-pressure-next-app.vercel.app/
+https://no-pressure-next-app.vercel.app
 
 > 部署在 Vercel，使用 Supabase 做 Auth 和 Database
 
