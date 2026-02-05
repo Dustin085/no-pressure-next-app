@@ -11,7 +11,7 @@ import {
     Legend,
 } from "recharts";
 
-export function BloodPressureTrendChart({ days = 7 }: { days: number }) {
+export function BloodPressureTrendChart({ days = 7 }: { days?: number }) {
     // step.1 計算時間區間 (ISO)
     const { startISO, endISO } = getRecentNDaysISO(days)
 

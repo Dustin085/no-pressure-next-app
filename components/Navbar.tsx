@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
 import { ROUTES } from '@/lib/constants/routes';
-import { useLogout } from '@/hooks/useLogout';
+import { useLogout } from '@/features/auth/hooks/useLogout';
 import { QuickRecordDialog } from '@/features/records/components/QuickRecordDialog';
 import { useUser } from '@/features/auth/hooks/useUser';
 
