@@ -31,13 +31,13 @@ export function BloodPressureTrendChart({ days = 7 }: { days?: number }) {
         d.setDate(d.getDate() - i)
         return {
             dateStr: d.toLocaleDateString("en-US", { month: "2-digit", day: "2-digit" }),
-            isoDate: d.toISOString().split("T")[0], // "2025-02-03"
+            isoDate: d.toLocaleDateString('sv-SE'), // "2025-02-03"
         }
     }).reverse() // 從舊 → 新
 
     // 4.2 按日期分組 + 計算平均
     const dataByDate = data.reduce((acc, record) => {
-        const dateKey = new Date(record.measured_at).toISOString().split("T")[0]
+        const dateKey = new Date(record.measured_at).toLocaleDateString('sv-SE')
         if (!acc[dateKey]) {
             acc[dateKey] = { systolic: [], diastolic: [] }
         }

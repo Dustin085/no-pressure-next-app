@@ -44,13 +44,13 @@ type UTCISOString = string;
 
 /**
  * 取得某時間區間的血壓紀錄
- * @param startISO 當日 00:00:00
- * @param endISO 次日 00:00:00
+ * @param startISO n 天前本地 00:00 的 UTC ISO
+ * @param endISO 次日本地 00:00 的 UTC ISO（半開區間，不包含明天）
  * @returns 時間區間內的血壓紀錄陣列
  */
 export async function getRecordsWithinISORange(
     startISO: UTCISOString,
-    endISO: UTCISOString // next day start
+    endISO: UTCISOString
 ) {
     const { data, error } = await supabase
         .from('blood_pressure_records')
