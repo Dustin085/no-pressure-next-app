@@ -2,14 +2,13 @@
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
 import { ROUTES } from '@/lib/constants/routes';
-import { useLogout } from '@/features/auth/hooks/useLogout';
 import { QuickRecordDialog } from '@/features/records/components/QuickRecordDialog';
-import { useUser } from '@/features/auth/hooks/useUser';
+import { LogoutButton } from '@/features/auth/components/LogoutButton';
+import { useAuth } from '@/features/auth/hooks/useAuth';
+import { LoginButton } from '@/features/auth/components/LoginButton';
 
 export default function Navbar() {
-    const logout = useLogout()
-
-    const { data: user, isLoading } = useUser()
+    const { user, isLoading } = useAuth()
 
     return (
         <nav className="bg-card dark:bg-card border-b border-border p-4 flex justify-between items-center">
@@ -29,20 +28,16 @@ export default function Navbar() {
                 <Link href={ROUTES.DASHBOARD} className="text-text-muted hover:text-text">
                     Dashboard
                 </Link>
-                <Link href={ROUTES.RECORDS} className="text-text-muted hover:text-text">
-                    Records
-                </Link>
-                <Link href={ROUTES.PROFILE} className="text-text-muted hover:text-text">
-                    Profile
-                </Link>
             </div>
 
             {/* Actions */}
             <div className="flex items-center space-x-4">
                 <ThemeToggle />
-                <button onClick={logout} className="px-4 py-2 rounded bg-primary hover:bg-primary-hover text-text">
-                    Logout
-                </button>
+                {
+                    user ?
+                        <LogoutButton /> :
+                        <LoginButton />
+                }
             </div>
 
             {/* Mobile Menu Button */}

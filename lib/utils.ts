@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
+  // twMerge = Tailwiind Merge 會以後寫的 className 為優先
   return twMerge(clsx(inputs))
 }
 

@@ -1,4 +1,4 @@
-import { ROUTES } from '@/lib/constants/routes'
+import { PUBLIC_PATHS, ROUTES } from '@/lib/constants/routes'
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
@@ -38,12 +38,22 @@ export async function updateSession(request: NextRequest) {
 
     const user = data?.claims
 
+    const isPublicPath = PUBLIC_PATHS.some((path) =>
+        /*
+        當 path = '/' 時：
+            request.nextUrl.pathname === '/' → true（只匹配根）
+            request.nextUrl.pathname.startsWith('//') → 不會匹配任何東西（因為沒有雙斜線路徑）
+
+        當 path = '/login' 時：
+            request.nextUrl.pathname === '/login' → true
+            request.nextUrl.pathname.startsWith('/login/') → 匹配 /login/callback 等
+        */
+        request.nextUrl.pathname === path || request.nextUrl.pathname.startsWith(path + '/')
+    );
+
     if (
         !user &&
-        !request.nextUrl.pathname.startsWith(ROUTES.LOGIN) &&
-        !request.nextUrl.pathname.startsWith('/auth') &&
-        !request.nextUrl.pathname.startsWith(ROUTES.SIGNUP) &&
-        !request.nextUrl.pathname.startsWith("/check-email")
+        !isPublicPath
     ) {
         // no user, potentially respond by redirecting the user to the login page
         const url = request.nextUrl.clone()

@@ -3,18 +3,18 @@
 import { RecentRecords } from "@/features/records/components/RecentRecords";
 import { LatestRecordTime } from "@/features/insights/components/LatestRecordTime";
 import { RecentAverageBloodPressure } from "@/features/insights/components/RecentAverageBloodPressure";
-import { useUser } from "@/features/auth/hooks/useUser";
 import { BloodPressureTrendChart } from "@/features/insights/components/BloodPressureTrendChart";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 export default function Dashboard() {
-    const user = useUser()
+    const { user } = useAuth()
 
     return (
         <main className="bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
             <div className="max-w-6xl mx-auto p-4 space-y-6">
                 {/* Greeting */}
                 <section>
-                    <h1 className="text-2xl font-semibold">您好, {user.data?.user_metadata.name}!</h1>
+                    <h1 className="text-2xl font-semibold">您好, {user ? user.user_metadata.name : '使用者'}!</h1>
                 </section>
 
                 {/* Summary Card */}
