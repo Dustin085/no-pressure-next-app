@@ -12,8 +12,9 @@ export default function Providers({ children }: { children: ReactNode }) {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <AuthListener />
-            {children}
+            <AuthListener>
+                {children}
+            </AuthListener>
         </QueryClientProvider>
     );
 }

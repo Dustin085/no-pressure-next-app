@@ -1,58 +1,56 @@
-'use client'
-
-import { LoginFormInputSchema } from "@/features/auth/schema";
+import { EmailSignupInputSchema } from "@/features/auth/schema";
 import { ROUTES } from "@/lib/constants/routes";
 import { supabase } from "@/lib/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import Image from 'next/image';
-import { useState } from "react";
 
-export function LoginForm() {
-    const [isOAuthLoading, setIsOAuthLoading] = useState(false);
-
+export function SignupForm() {
     const router = useRouter()
+
     const {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
         setError,
     } = useForm({
-        resolver: zodResolver(LoginFormInputSchema),
+        resolver: zodResolver(EmailSignupInputSchema),
     });
 
-    const handleGoogleLogin = async () => {
-        setIsOAuthLoading(true)
-
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
+    const handleEmailSignup = async (email: string, password: string) => {
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
             options: {
-                redirectTo: `${window.location.origin}/auth/callback`,
-            },
-        });
+                data: {
+                    display_name: email
+                }
+            }
+        })
 
         if (error) {
-            setError('root.signInWithGoogleError', { message: error.message })
-            setIsOAuthLoading(false)
-        };
-    };
+            setError("root.signupError", {
+                message: error.message,
+            })
+            return
+        }
 
+        if (data.user && !data.session) {
+            router.replace("/check-email")
+        } else {
+            router.replace(ROUTES.DASHBOARD)
+        }
+    }
     return (
         <div className="bg-card p-10 rounded-2xl shadow-md w-90 space-y-4">
             <h2 className="text-2xl font-bold text-center text-foreground">
-                登入 NoPressure
+                註冊新帳號
             </h2>
 
-            {/* Email / Password Login Form */}
+            {/* Email and password signup form */}
             <form
                 onSubmit={handleSubmit(async (data) => {
-                    const { error } = await supabase.auth.signInWithPassword({
-                        email: data.email,
-                        password: data.password
-                    })
-                    if (error) { setError('root.signInWithPasswordError', { message: error.message }) }
-                    else { router.replace(ROUTES.DASHBOARD) }
+                    await handleEmailSignup(data.email, data.password)
                 })}
                 className="space-y-4"
             >
@@ -73,6 +71,7 @@ export function LoginForm() {
                         <p className="text-xs text-error">{errors.email.message as string}</p>
                     )}
                 </div>
+
                 {/* Password input */}
                 <div className="flex flex-col gap-1">
                     <label htmlFor="password" className="text-sm font-medium text-foreground">
@@ -81,7 +80,6 @@ export function LoginForm() {
                     <input
                         id="password"
                         type="password"
-                        autoComplete="current-password"
                         placeholder="請輸入密碼"
                         {...register("password")}
                         className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary-hover focus:outline-none focus:ring-1 focus:ring-prhovborder-primary-hover"
@@ -91,9 +89,26 @@ export function LoginForm() {
                     )}
                 </div>
 
-                {/* Supabase Sign in with password error */}
-                {errors.root?.signInWithPasswordError && (
-                    <p className="text-xs text-error">{errors.root.signInWithPasswordError.message as string}</p>
+                {/* Confirm password input */}
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="confirmPassword" className="text-sm font-medium text-foreground">
+                        確認密碼
+                    </label>
+                    <input
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="請輸入密碼"
+                        {...register("confirmPassword")}
+                        className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary-hover focus:outline-none focus:ring-1 focus:ring-prhovborder-primary-hover"
+                    />
+                    {errors.confirmPassword && (
+                        <p className="text-xs text-error">{errors.confirmPassword.message as string}</p>
+                    )}
+                </div>
+
+                {/* Supabase Sign up with password error */}
+                {errors.root?.signupError && (
+                    <p className="text-xs text-error">{errors.root.signupError.message as string}</p>
                 )}
 
                 <button
@@ -101,32 +116,18 @@ export function LoginForm() {
                     disabled={isSubmitting}
                     className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-foreground hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {isSubmitting ? "登入中..." : "登入"}
+                    {isSubmitting ? "註冊中..." : "註冊"}
                 </button>
             </form>
 
-            {/* Login with Google Button */}
+            {/* Already have account Button */}
             <button
-                onClick={handleGoogleLogin}
-                disabled={isOAuthLoading}
-                className="w-full py-2 border text-gray-700 border-gray-500 rounded-lg flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-                <Image src="/google.svg" className="w-5 h-5" width={36} height={36} alt="google icon" />
-                {isOAuthLoading ? "登入中..." : "使用 Google 登入"}
-            </button>
-
-            {/* Supabase Sign in with google error */}
-            {errors.root?.signInWithGoogleError && (
-                <p className="text-xs text-error">{errors.root.signInWithGoogleError.message as string}</p>
-            )}
-
-            {/* New account Button */}
-            <button
-                onClick={() => router.push(ROUTES.SIGNUP)}
+                onClick={() => router.push(ROUTES.LOGIN)}
                 className="w-full py-2 text-sm text-primary hover:underline"
             >
-                Create a new account
+                使用現有帳號登入
             </button>
+
         </div>
     )
 }
