@@ -1,6 +1,6 @@
-import { PUBLIC_PATHS, ROUTES } from '@/lib/constants/routes'
+import { AUTH_PATHS, PUBLIC_PATHS, ROUTES } from '@/lib/constants/routes'
 import { createServerClient } from '@supabase/ssr'
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
     let supabaseResponse = NextResponse.next({
@@ -51,6 +51,21 @@ export async function updateSession(request: NextRequest) {
         request.nextUrl.pathname === path || request.nextUrl.pathname.startsWith(path + '/')
     );
 
+    const isAuthPath = AUTH_PATHS.some((path) =>
+        request.nextUrl.pathname === path
+    );
+
+    // 已登入 + 訪問 auth 路徑 => 跳到 dashboard
+    if (
+        user &&
+        isAuthPath
+    ) {
+        const url = request.nextUrl.clone()
+        url.pathname = ROUTES.DASHBOARD
+        return NextResponse.redirect(url)
+    }
+
+    // 未登入 + 訪問非公共路徑 => 跳到 login
     if (
         !user &&
         !isPublicPath

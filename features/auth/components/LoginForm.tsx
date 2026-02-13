@@ -38,6 +38,15 @@ export function LoginForm() {
         };
     };
 
+    const handleEmailLogin = async (email: string, password: string) => {
+        const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        })
+        if (error) { setError('root.signInWithPasswordError', { message: error.message }) }
+        else { router.replace(ROUTES.DASHBOARD) }
+    };
+
     return (
         <div className="bg-card p-10 rounded-2xl shadow-md w-90 space-y-4">
             <h2 className="text-2xl font-bold text-center text-foreground">
@@ -46,13 +55,8 @@ export function LoginForm() {
 
             {/* Email / Password Login Form */}
             <form
-                onSubmit={handleSubmit(async (data) => {
-                    const { error } = await supabase.auth.signInWithPassword({
-                        email: data.email,
-                        password: data.password
-                    })
-                    if (error) { setError('root.signInWithPasswordError', { message: error.message }) }
-                    else { router.replace(ROUTES.DASHBOARD) }
+                onSubmit={handleSubmit(async ({ email, password }) => {
+                    await handleEmailLogin(email, password)
                 })}
                 className="space-y-4"
             >

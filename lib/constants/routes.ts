@@ -18,3 +18,10 @@ export const PUBLIC_PATHS = [
     // 如果有其他公開頁面，例如about、privacy 等，可加在這裡
     // '/about',
 ] as const
+
+export const AUTH_PATHS = [
+    ROUTES.LOGIN,
+    ROUTES.SIGNUP,
+    // 如果有其他 auth 頁面，例如 reset-password 等，可加在這裡
+    // '/reset-password'
+] as const

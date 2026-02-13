@@ -1,3 +1,5 @@
+'use client'
+
 import { EmailSignupInputSchema } from "@/features/auth/schema";
 import { ROUTES } from "@/lib/constants/routes";
 import { supabase } from "@/lib/supabase/client";
@@ -49,8 +51,8 @@ export function SignupForm() {
 
             {/* Email and password signup form */}
             <form
-                onSubmit={handleSubmit(async (data) => {
-                    await handleEmailSignup(data.email, data.password)
+                onSubmit={handleSubmit(async ({ email, password }) => {
+                    await handleEmailSignup(email, password)
                 })}
                 className="space-y-4"
             >
