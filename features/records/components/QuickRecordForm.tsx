@@ -2,6 +2,7 @@
 import { UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { QuickRecordFormData, QuickRecordFormInput } from "@/features/records/types";
+import { ChangeEvent } from "react";
 
 type QuickRecordFormProps = {
     form: UseFormReturn<QuickRecordFormInput, unknown, QuickRecordFormData>;
@@ -16,6 +17,41 @@ export function QuickRecordForm({ form, onSubmit, isPending }: QuickRecordFormPr
         formState: { errors },
     } = form;
 
+    // 管理 auto focus 的規則
+    const autoFocusRules: Record<
+        keyof QuickRecordFormInput,
+        // 使用者填入 autoFocusRange 範圍內的數字時會 setFocus(next)
+        { maxLength?: number; autoFocusRange?: { min: number, max: number }; next?: keyof QuickRecordFormInput }
+    > = {
+        systolic: { maxLength: 3, autoFocusRange: { min: 30, max: 100 }, next: "diastolic" },
+        diastolic: { maxLength: 3, autoFocusRange: { min: 30, max: 100 }, next: "pulse" },
+        pulse: { maxLength: 3 },
+        measured_at: {},
+    };
+
+    const handleAutoFocus = (
+        e: ChangeEvent<HTMLInputElement>,
+        field: keyof QuickRecordFormInput
+    ) => {
+        const rule = autoFocusRules[field]
+        if (!rule.next) return
+
+        const value = e.target.value
+        if (!value) return
+
+        // 到達或超過最大長度則 setFocus
+        if (rule.maxLength && value.length >= rule.maxLength) {
+            form.setFocus(rule.next);
+        }
+
+        // 處理 autoFocusRange
+        if (!rule.autoFocusRange) return
+        const valueNum = Number(value);
+        if (valueNum > rule.autoFocusRange.min && valueNum < rule.autoFocusRange.max) {
+            form.setFocus(rule.next)
+        }
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
             {/* 收縮壓 */}
@@ -25,9 +61,18 @@ export function QuickRecordForm({ form, onSubmit, isPending }: QuickRecordFormPr
                 </label>
                 <input
                     id="systolic"
-                    type="number"
                     placeholder="例如：120"
-                    {...register("systolic", { valueAsNumber: true })}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={3}
+                    {...register("systolic", {
+                        setValueAs: v => v === "" ? undefined : Number(v),
+                        onChange: (e) => {
+                            e.target.value = e.target.value.replace(/\D/g, '');
+                            handleAutoFocus(e, "systolic");
+                        }
+                    })}
+                    onFocus={e => e.target.select()}
                     className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.systolic && (
@@ -42,9 +87,18 @@ export function QuickRecordForm({ form, onSubmit, isPending }: QuickRecordFormPr
                 </label>
                 <input
                     id="diastolic"
-                    type="number"
                     placeholder="例如：80"
-                    {...register("diastolic", { valueAsNumber: true })}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={3}
+                    {...register("diastolic", {
+                        setValueAs: v => v === "" ? undefined : Number(v),
+                        onChange: (e) => {
+                            e.target.value = e.target.value.replace(/\D/g, '');
+                            handleAutoFocus(e, "diastolic");
+                        }
+                    })}
+                    onFocus={e => e.target.select()}
                     className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.diastolic && (
@@ -59,12 +113,19 @@ export function QuickRecordForm({ form, onSubmit, isPending }: QuickRecordFormPr
                 </label>
                 <input
                     id="pulse"
-                    type="number"
                     placeholder="例如：70"
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={3}
                     {...register("pulse", {
                         // Number('') 會 return 0
-                        setValueAs: v => v === "" ? undefined : Number(v)
+                        setValueAs: v => v === "" ? undefined : Number(v),
+                        onChange: (e) => {
+                            e.target.value = e.target.value.replace(/\D/g, '');
+                            handleAutoFocus(e, "pulse");
+                        }
                     })}
+                    onFocus={e => e.target.select()}
                     className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.pulse && (
