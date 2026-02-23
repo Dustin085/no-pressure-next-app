@@ -1,4 +1,5 @@
 'use client';
+import { ROUTES } from '@/lib/constants/routes';
 import { supabase } from '@/lib/supabase/client';
 // import { useRouter } from 'next/navigation';
 
@@ -11,7 +12,7 @@ export function useLogout() {
         const { error } = await supabase.auth.signOut();
 
         // if (!error) router.push('/login');
-        if (!error) window.location.href = '/login';
+        if (!error) window.location.href = ROUTES.LOGIN;
         else console.error(error.message);
     };
 

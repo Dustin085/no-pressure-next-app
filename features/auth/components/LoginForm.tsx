@@ -44,7 +44,8 @@ export function LoginForm() {
             password,
         })
         if (error) { setError('root.signInWithPasswordError', { message: error.message }) }
-        else { router.replace(ROUTES.DASHBOARD) }
+        else { window.location.assign(ROUTES.DASHBOARD) }
+        // else { router.replace(ROUTES.DASHBOARD) }
     };
 
     return (
